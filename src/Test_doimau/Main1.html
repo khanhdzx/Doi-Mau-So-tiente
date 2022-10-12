@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<h1 id="ketqua"></h1>-->
+<table border="1" style="width: 500px;right: 100px">
+  <tr>
+    <td>Amount</td>
+    <td>From Currency</td>
+    <td> To Currency</td>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" id="Tien">
+    </td>
+    <td>
+      <select id="nhap" onChange="ChuyenDoiTienTe()">
+        <option value="VND">VietNam</option>
+        <option value="USD">USD</option>
+      </select>
+    </td>
+    <td>
+      <select id="xuat" onChange="ChuyenDoiTienTe()">
+        <option value="USD">USD</option>
+        <option value="VND">VietNam</option>
+      </select>
+    </td>
+            <td>
+                <input type="submit" value="Convert" onclick="ChuyenDoiTienTe()">
+            </td>
+        </tr>
+</table>
+<h1 id="demo1"></h1>
+<script>
+  function ChuyenDoiTienTe() {
+      let tien = +document.getElementById('Tien').value;
+      let xuat = document.getElementById('xuat').value;
+      let nhap = document.getElementById('nhap').value;
+      let result = '';
+      if (nhap === xuat) {
+          result = tien;
+      } else {
+          if (nhap === 'VND') {
+              // document.getElementById("ketqua").innerText = tien / 23000
+              result = tien / 23000;
+          } else {
+              // document.getElementById("ketqua").innerText = tien * 23000
+              result = tien * 23000;
+          }
+      }
+      console.log('result ===', result)
+      result += '';
+      console.log('result sau ===', result)
+
+      changeColor(result)
+      setTimeout(ChuyenDoiTienTe, 100)
+  }
+
+  // let str= 'Khanh'
+  function generateRandomColor(){
+
+    let maxVal = 0xFFFFFF; // 16777215
+    let randomNumber = Math.random() * maxVal;
+    randomNumber = Math.floor(randomNumber);
+    randomNumber = randomNumber.toString(16);
+    let randColor = randomNumber.padStart(6, 0);
+    return `#${randColor.toUpperCase()}`
+  }
+  function changeColor(result) {
+    let strAfter = '';
+    for (let i = 0; i < result.length; i++) {
+      console.log('i == ',i)
+      strAfter+=result[i].fontcolor(generateRandomColor())
+    }
+    document.getElementById('demo1').innerHTML = strAfter;
+
+
+  }
+</script>
+</body>
+</html>
